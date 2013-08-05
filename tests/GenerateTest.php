@@ -4,6 +4,7 @@ class GenerateTest extends Unittest_TestCase
 {
     protected function setUp()
     {
+        parent::setUp();
         // $this->markTestSkipped("Message");
     }
 
