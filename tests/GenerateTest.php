@@ -8,7 +8,7 @@ class GenerateTest extends Unittest_TestCase
         // $this->markTestSkipped("Message");
     }
 
-    public function test_generate_without_arguments()
+    public function testGenerateWithoutArguments()
     {
         $key = Keys::Generate();
 
@@ -16,7 +16,7 @@ class GenerateTest extends Unittest_TestCase
     }
 
     // Test what happens when a format without characters to replace is used
-    public function test_generate_format_without_replace_char()
+    public function testGenerateFormatWithoutReplaceChar()
     {
         $key = Keys::Generate("hdjas-skajdkasj-dj938-8848");
         $this->expectedExceptionMessage("did not contain your replace character");
