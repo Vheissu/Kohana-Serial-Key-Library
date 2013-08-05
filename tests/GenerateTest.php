@@ -19,5 +19,6 @@ class GenerateTest extends Unittest_TestCase
     public function test_generate_format_without_replace_char()
     {
         $key = Keys::Generate("hdjas-skajdkasj-dj938-8848");
+        $this->expectedExceptionMessage("did not contain your replace character");
     }
 }
