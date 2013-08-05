@@ -82,6 +82,18 @@ class Keys_Core
         {
             $format = self::$_config->get("keys.default_format");
         }
+        else
+        {
+            // Uh oh, supplied format does not have the replace char
+            if (! strpos($format, self::$_config->get('keys.replace_char'))
+            {
+                $exception_arr = array(
+                    ":format"            => $format,
+                    ":replace_char" => self::$_config->get('keys.replace_char')
+                );
+                throw new Kohana_Exception("Your supplied key format, ':format' did not contain your replace character which is, ':replace_char'.", $exception_arr);
+            }
+        }
 
         $key                = array();
         $format_length = strlen($format);
