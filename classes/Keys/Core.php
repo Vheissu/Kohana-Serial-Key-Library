@@ -48,7 +48,7 @@ class Keys_Core
         $pool = str_replace(self::$_config->get('keys.replace_char'), "", $pool);
 
         // Split the pool into an array of characters
-        $pool = ($utf8 === TRUE) ? UTF8::str_split($pool, 1) : str_split($pool, 1);
+        $pool = str_split($pool, 1);
 
         // Largest pool key
         $max = count($pool) - 1;
