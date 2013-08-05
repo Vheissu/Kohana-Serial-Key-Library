@@ -11,7 +11,7 @@ class Keys_Core
      * text class, "Random" static method.
      *
      */
-    public static random($length = 8, $all_caps = FALSE, $all_lowercase = FALSE, $all_numeric = FALSE)
+    public static function random($length = 8, $all_caps = FALSE, $all_lowercase = FALSE, $all_numeric = FALSE)
     {
         // Have we populated the config array?
         if ( empty(self::$_config) )
