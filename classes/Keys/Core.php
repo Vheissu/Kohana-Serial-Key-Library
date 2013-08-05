@@ -37,6 +37,13 @@ class Keys_Core
             $pool = "123456789";
         }
 
+        // We don't want upper, lower or numeric, give em' a mixed back then.
+        // I hate how long this if statement is...
+        if (self::$_config['keys.all_caps'] == FALSE && $all_caps == FALSE && self::$_config['keys.all_lowercase'] == FALSE && $all_lowercase == FALSE && self::$_config['keys.numeric_only'] == FALSE && $all_numeric == FALSE)
+        {
+            $pool = "123456789abcdefghijkmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ";
+        }
+
         // Remove any instances of the replace CHAR from the pool.
         $pool = str_replace(self::$_config->get('keys.replace_char'), "", $pool);
 
@@ -85,7 +92,7 @@ class Keys_Core
             {
                 if ( $format[$i] == self::$_config->get('keys.replace_char') )
                 {
-                    $key[] = self::Random(1);
+                    $key[] = self::Random(1, $all_caps, $all_lowercase, $all_numeric);
                 }
                 else
                 {
