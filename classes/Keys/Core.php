@@ -20,32 +20,32 @@ class Keys_Core
         }
 
         // Is this an all capital letter only key?
-        if (self::$_config['keys.all_caps'] == TRUE || $all_caps == TRUE)
+        if (self::$_config['all_caps'] == TRUE || $all_caps == TRUE)
         {
             $pool = "2345679ACDEFHJKLMNPRSTUVWXYZ";
         }
 
         // Is this an all lowercase only key?
-        if (self::$_config['keys.all_lowercase'] == TRUE || $all_lowercase == TRUE)
+        if (self::$_config['all_lowercase'] == TRUE || $all_lowercase == TRUE)
         {
             $pool = "2345679acdefhjkmnprstyvwxyz";
         }
 
         // Is this a numeric only key?
-        if (self::$_config['keys.numeric_only'] == TRUE || $all_numeric == TRUE)
+        if (self::$_config['numeric_only'] == TRUE || $all_numeric == TRUE)
         {
             $pool = "123456789";
         }
 
         // We don't want upper, lower or numeric, give em' a mixed back then.
         // I hate how long this if statement is...
-        if (self::$_config['keys.all_caps'] == FALSE && $all_caps == FALSE && self::$_config['keys.all_lowercase'] == FALSE && $all_lowercase == FALSE && self::$_config['keys.numeric_only'] == FALSE && $all_numeric == FALSE)
+        if (self::$_config['all_caps'] == FALSE && $all_caps == FALSE && self::$_config['all_lowercase'] == FALSE && $all_lowercase == FALSE && self::$_config['keys.numeric_only'] == FALSE && $all_numeric == FALSE)
         {
             $pool = "123456789abcdefghijkmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ";
         }
 
         // Remove any instances of the replace CHAR from the pool.
-        $pool = str_replace(self::$_config->get('keys.replace_char'), "", $pool);
+        $pool = str_replace(self::$_config->get('replace_char'), "", $pool);
 
         // Split the pool into an array of characters
         $pool = str_split($pool, 1);
@@ -80,16 +80,16 @@ class Keys_Core
         // No format specified? Use the config file default
         if ($format == NULL)
         {
-            $format = self::$_config->get("keys.default_format");
+            $format = self::$_config->get("default_format");
         }
         else
         {
             // Uh oh, supplied format does not have the replace char
-            if ( !strpos($format, self::$_config->get('keys.replace_char') ) )
+            if ( !strpos($format, self::$_config->get('replace_char') ) )
             {
                 $exception_arr = array(
                     ":format"            => $format,
-                    ":replace_char" => self::$_config->get('keys.replace_char')
+                    ":replace_char" => self::$_config->get('replace_char')
                 );
                 throw new Kohana_Exception("Your supplied key format, ':format' did not contain your replace character which is, ':replace_char'.", $exception_arr);
             }
@@ -102,7 +102,7 @@ class Keys_Core
         do {
             for ($i=0 ; $i < $format_length ; $i++)
             {
-                if ( $format[$i] == self::$_config->get('keys.replace_char') )
+                if ( $format[$i] == self::$_config->get('replace_char') )
                 {
                     $key[] = self::Random(1, $all_caps, $all_lowercase, $all_numeric);
                 }
