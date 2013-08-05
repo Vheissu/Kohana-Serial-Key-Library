@@ -85,7 +85,7 @@ class Keys_Core
         else
         {
             // Uh oh, supplied format does not have the replace char
-            if (! strpos($format, self::$_config->get('keys.replace_char'))
+            if ( !strpos($format, self::$_config->get('keys.replace_char') ) )
             {
                 $exception_arr = array(
                     ":format"            => $format,
